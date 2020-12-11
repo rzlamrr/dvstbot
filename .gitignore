@@ -16,15 +16,3 @@ debug.log
 
 # Lock files
 package-lock.json
-
-# Other files
-premium.js
-quotemsg.js
-lib/quran.js
-util/flat.json
-util/getScreenshot.js
-utils/canvas.js
-utils/flat.json
-utils/getScreenshot.js
-lib/instaStory.js
-lib/jiwa.js

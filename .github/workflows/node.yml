@@ -1,0 +1,46 @@
+name: FailedChecker
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: |
+        npm install
+        npm i prettier-eslint prettier-eslint-cli
+        npm install --only=dev --ignore-scripts
+    - name: Run linters
+      run: |
+        npx prettier-eslint --write \"*.js\" \"dvstbot/*\"
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: 'lint: auto formatter'
+        commit_options: '--no-verify --signoff'
+        file_pattern: index.js dvstbot/
+        repository: .
+        commit_user_name: rzlamrr
+        commit_user_email: rizal82rebel@gmail.com
+        commit_author: rzlamrr <rizal82rebel@gmail.com>
+
+  shellcheck:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Check for install script errors
+      uses: ludeeus/action-shellcheck@0.1.0

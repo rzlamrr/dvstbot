@@ -5,7 +5,7 @@
 <a href="https://github.com/rzlamrr"><img title="Author" src="https://img.shields.io/badge/AUTHOR-rzlamrr-orange.svg?style=for-the-badge&logo=github"></a>
 </p>
 <p align="center">
-<a href="https://www.codefactor.io/repository/github/rzlamrr/dvstbot/overview/master"><img title="Rating" src="https://www.codefactor.io/repository/github/rzlamrr/dvstbot/badge/master"></a>
+<a href="https://www.codefactor.io/repository/github/rzlamrr/dvstbot/overview/main"><img title="Rating" src="https://www.codefactor.io/repository/github/rzlamrr/dvstbot/badge/main"></a>
 </p>
 <p align="center">
 <a href="https://github.com/rzlamrr/dvstbot/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/rzlamrr/dvstbot?color=red&style=flat-square"></a>
