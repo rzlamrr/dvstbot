@@ -1,6 +1,7 @@
 const { create, Client } = require('@open-wa/wa-automate')
 const start = (dvstbot = new Client()) => {
-    console.log('dvstbot')
+    console.log('dvstbot.data.json created!')
+    return process.exit()
 }
 
 create({
@@ -11,7 +12,6 @@ create({
   headless: true,
   killProcessOnBrowserClose: true,
   throwErrorOnTosBlock: false,
-  useChrome: true,
   qrTimeout: 0,
   chromiumArgs: [
       '--no-sandbox',

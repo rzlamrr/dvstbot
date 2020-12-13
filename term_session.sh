@@ -19,8 +19,13 @@
 
 export LANG=C.UTF-8
 
-echo -e "\nChecking dependencies...\n"
+shutt () {
+    { "$@" || return @?; } | while read -r line;do
+        :
+    done
+}
 
+echo -e "\nChecking dependencies...\n"
 if command -v node >/dev/null 2>&1 ; then
     echo -e "nodejs found "
     echo -e "version: $(node -v)"
@@ -45,18 +50,18 @@ fi
 
 DEPENDENCIES=${arr[@]}
 sleep 1
+clear
 
 if [ ! -z "$DEPENDENCIES" ]; then
-    echo -e "\nInstalling required dependencies\n"
-    sleep 1
-
+    echo -n -e "\nInstalling required dependencies\n"
     if [ "$(command -v pkg)" != "" ]; then # termux
-        pkg install "$DEPENDENCIES" -y
+        shutt pkg install "$DEPENDENCIES" -y 2>/dev/null
 
     elif [ "$(command -v apt-get)" != "" ]; then # debian
-        sudo apt-get install "$DEPENDENCIES" -Y
+        shutt sudo apt-get install "$DEPENDENCIES" -y 2>/dev/null
+
     elif [ "$(command -v pacman)" != "" ]; then # arch
-        sudo pacman -S "$DEPENDENCIES"npm -y
+        shutt sudo pacman -S "$DEPENDENCIES"npm -y 2>/dev/null
 
 # Free to PR to add others
     else
@@ -65,18 +70,24 @@ if [ ! -z "$DEPENDENCIES" ]; then
 
 else
     echo -e "\nDependencies have been installed. \n"
-    sleep 1
 fi
 
-if [ ! -e wabot_sessio.js ]; then
+sleep 1
+clear
+
+if [ ! -f wabot_session.js ]; then
     echo -e "\nDownloading wabot_session.js\n"
-    wget https://raw.githubusercontent.com/rzlamrr/dvstbot/main/wabot_session.js
+    shutt wget https://raw.githubusercontent.com/rzlamrr/dvstbot/main/wabot_session.js 2>/dev/null
 fi
+
+clear
 echo -e "\nInstalling package\n"
 npm i @open-wa/wa-automate
+
+clear
 echo -e "\nRunning script...\n"
-sleep 1
 if node wabot_session.js; then
+    clear
     echo -e "Here your session:\n"
     cat *.data.json
     echo
@@ -85,6 +96,7 @@ else
     echo "Could not make session"
 fi
 
+clear
 echo -e "Do you want to cleanup your file?"
 echo -e "[1] cleanup: this delete wabot_session.js and this file"
 echo -e "[2] exit"

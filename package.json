@@ -17,7 +17,7 @@
   "homepage": "https://github.com/rzlamrr/dvstbot",
   "license": "ISC",
   "dependencies": {
-    "@open-wa/wa-automate": "^3.1.0",
+    "@open-wa/wa-automate": "^3.1.8",
     "app-root-path": "^3.0.0",
     "axios": "^0.21.0",
     "chalk": "^4.1.0",
