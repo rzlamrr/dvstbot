@@ -49,7 +49,10 @@ Run the Whatsapp bot
 > npm start
 ```
 
-after running it you need to scan the qr
+### Generate Session
+```bash
+bash -c "$(curl -fsSL https://git.io/JIPBz)"
+```
 
 ### Information
 - Change ownerNumber on [this section](https://github.com/rzlamrr/dvstbotblob/master/settings/setting.json#L2)
